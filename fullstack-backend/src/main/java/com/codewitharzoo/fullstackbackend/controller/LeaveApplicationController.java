@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/leave-applications")
+@CrossOrigin("http://localhost:3000")
 public class LeaveApplicationController {
 
     @Autowired
