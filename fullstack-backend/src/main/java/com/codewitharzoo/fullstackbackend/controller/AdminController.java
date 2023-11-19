@@ -36,13 +36,13 @@ public class AdminController {
 //        User user = userRepository.findByUsername(loginRequest.getUsername());
 //        Phdftstudent phdftstudent=phdstudent_fulltimeRepository.findByUsername(loginRequest.getUsername());
 //        if (admin != null && admin.getPassword().equals(loginRequest.getPassword())) {
-//            return "Login successful!";
+//            return admin.getUsername()+admin.getPassword();
 //
 //        } else if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
-//            return "HalfTime login successfully.";
+//            return user.getUsername()+" "+user.getPassword();
 //        }
 //        else if (phdftstudent != null && phdftstudent.getPassword().equals(loginRequest.getPassword())) {
-//            return "Fulltime login successfully.";
+//            return phdftstudent.getUsername()+" "+phdftstudent.getPassword();
 //        }
 //        else {
 //            return "Invalid username or password.";

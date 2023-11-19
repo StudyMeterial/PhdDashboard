@@ -1,9 +1,7 @@
 package com.codewitharzoo.fullstackbackend.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+
+import jakarta.persistence.*;
 
 @Entity
 public class Phdftstudent {
@@ -11,6 +9,7 @@ public class Phdftstudent {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String fullname;
+    private String PhdStudent;
     private String email;
     private String username;
     private String password;
@@ -18,6 +17,8 @@ public class Phdftstudent {
     private String village;
     private String dist;
     private String state;
+
+    // getters and setters
 
     public Long getId() {
         return id;
@@ -33,6 +34,14 @@ public class Phdftstudent {
 
     public void setFullname(String fullname) {
         this.fullname = fullname;
+    }
+
+    public String getPhdStudent() {
+        return PhdStudent;
+    }
+
+    public void setPhdStudent(String phdStudent) {
+        PhdStudent = phdStudent;
     }
 
     public String getEmail() {

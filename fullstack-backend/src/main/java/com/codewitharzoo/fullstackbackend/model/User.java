@@ -1,9 +1,8 @@
 package com.codewitharzoo.fullstackbackend.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.Set;
 
 @Entity
 public class User{
@@ -11,6 +10,16 @@ public class User{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String fullname;
+    private String PhdStudentHalf;
+
+    public String getPhdStudentHalf() {
+        return PhdStudentHalf;
+    }
+
+    public void setPhdStudentHalf(String phdStudentHalf) {
+        PhdStudentHalf = phdStudentHalf;
+    }
+
     private String email;
     private String username;
     private String password;
@@ -18,6 +27,25 @@ public class User{
     private String village;
     private String dist;
     private String state;
+
+//    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    @JoinTable(name = "USER_ROLE",
+//            joinColumns = {
+//                    @JoinColumn(name = "USER_ID")
+//            },
+//            inverseJoinColumns = {
+//                    @JoinColumn(name = "ROLE_ID")
+//            }
+//    )
+//    private Set<Role> role;
+
+//    public Set<Role> getRole() {
+//        return role;
+//    }
+//
+//    public void setRole(Set<Role> role) {
+//        this.role = role;
+//    }
 
     public Long getId() {
         return id;
@@ -90,4 +118,7 @@ public class User{
     public void setState(String state) {
         this.state = state;
     }
+
+
+
 }

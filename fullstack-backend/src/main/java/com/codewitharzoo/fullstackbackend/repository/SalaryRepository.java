@@ -1,12 +1,8 @@
 package com.codewitharzoo.fullstackbackend.repository;
 
-
 import com.codewitharzoo.fullstackbackend.model.Salary;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
-public interface SalaryRepository extends CrudRepository<Salary, Long> {
-    List<Salary> findByEmployeeId(Long employeeId);
-    // Custom queries if needed
+public interface SalaryRepository extends JpaRepository<Salary, Long> {
+    // You can add custom query methods here if needed
 }

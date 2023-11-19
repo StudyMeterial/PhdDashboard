@@ -25,13 +25,13 @@ public class UserController {
     @PostMapping("/user")
     public ResponseEntity<?> submitAdmission(@RequestBody User user) {
         // Validate the admission form data
-        if (user.getFullname() == null || user.getEmail() == null || user.getUsername() == null ||
+        if (user.getFullname() == null || user.getEmail() == null ||  user.getPhdStudentHalf() == null ||user.getUsername() == null ||
                 user.getPassword() == null || user.getQualification() == null || user.getVillage() == null ||
                 user.getDist() == null || user.getState() == null) {
             return ResponseEntity.badRequest().body("All fields are required.");
         }
 
-        // Additional validation and processing logic can be added here
+
 
         // Save the admission object to the repository
         User savedUser = userRepository.save(user);
@@ -39,11 +39,7 @@ public class UserController {
         // Assuming validation and processing are successful, return the saved object
         return ResponseEntity.ok(savedUser);
     }
-    //add user
-//    @PostMapping("/user")
-//     User newUser(@RequestBody User newUser){
-//        return userRepository.save(newUser);
-//    }
+
     //find all users
     @GetMapping("/users")
     Iterable<User> getAllUser(){
@@ -60,6 +56,11 @@ public class UserController {
     User getUserById(@PathVariable Long id){
         return userRepository.findById(id).orElseThrow(()->new UserNotFoundException(id));
     }
+//    @GetMapping("/user/{username}")
+//    User getUserByUsername(@PathVariable String username){
+//        return userRepository.findByUsername(username).orElseThrow(()->new UserNotFoundException(username));
+//    }
+
 
     //update user
     @PutMapping("/user/{id}")

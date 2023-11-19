@@ -1,10 +1,11 @@
-package com.codewitharzoo.fullstackbackend.model;
+package com.codewitharzoo.fullstackbackend.model;// src/main/java/com/codewitharzoo/fullstackbackend/model/Salary.java
 
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 
 @Entity
+
 public class Salary {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,10 +13,9 @@ public class Salary {
     private BigDecimal amount;
     private int month;
     private int year;
+    private String employeeName;
 
-    @ManyToOne
-    @JoinColumn(name = "Phdftstudent_id", referencedColumnName = "id")
-    private Phdftstudent employee;
+    // Constructors, getters, setters, and other methods
 
     public Long getId() {
         return id;
@@ -49,12 +49,11 @@ public class Salary {
         this.year = year;
     }
 
-    public Phdftstudent getEmployee() {
-        return employee;
+    public String getEmployeeName() {
+        return employeeName;
     }
 
-    public void setEmployee(Phdftstudent employee) {
-        this.employee = employee;
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
     }
-    // Other fields, getters, setters, and constructors
 }

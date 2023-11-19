@@ -2,15 +2,9 @@ package com.codewitharzoo.fullstackbackend.controller;
 
 import com.codewitharzoo.fullstackbackend.exception.UserNotFoundException;
 import com.codewitharzoo.fullstackbackend.model.Phdftstudent;
-import com.codewitharzoo.fullstackbackend.model.Salary;
 import com.codewitharzoo.fullstackbackend.repository.Phdstudent_FulltimeRepository;
-import com.codewitharzoo.fullstackbackend.repository.SalaryRepository;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin("http://localhost:3000")
@@ -18,18 +12,22 @@ public class phdstudent_fulltimeController {
 
 
     private  final Phdstudent_FulltimeRepository phdstudentFulltimeRepository;
-    private final SalaryRepository salaryRepository;
 
-    public phdstudent_fulltimeController(Phdstudent_FulltimeRepository phdstudentFulltimeRepository, SalaryRepository salaryRepository) {
+    public phdstudent_fulltimeController(Phdstudent_FulltimeRepository phdstudentFulltimeRepository) {
         this.phdstudentFulltimeRepository = phdstudentFulltimeRepository;
-        this.salaryRepository = salaryRepository;
     }
+//    private final SalaryRepository salaryRepository;
+//
+//    public phdstudent_fulltimeController(Phdstudent_FulltimeRepository phdstudentFulltimeRepository, SalaryRepository salaryRepository) {
+//        this.phdstudentFulltimeRepository = phdstudentFulltimeRepository;
+//        this.salaryRepository = salaryRepository;
+//    }
 
 
     @PostMapping("/phdstudentft")
     public ResponseEntity<?> submitAdmission(@RequestBody Phdftstudent phdftstudent) {
         // Validate the admission form data
-        if (phdftstudent.getFullname() == null || phdftstudent.getEmail() == null || phdftstudent.getUsername() == null ||
+        if (phdftstudent.getFullname() == null || phdftstudent.getEmail() == null ||  phdftstudent.getUsername() == null ||
                 phdftstudent.getPassword() == null || phdftstudent.getQualification() == null || phdftstudent.getVillage() == null ||
                 phdftstudent.getDist() == null || phdftstudent.getState() == null) {
             return ResponseEntity.badRequest().body("All fields are required.");
@@ -77,25 +75,25 @@ public class phdstudent_fulltimeController {
         phdstudentFulltimeRepository.deleteById(id);
         return "User with id "+id+" has been deleted success.";
     }
-
-    @PostMapping("/{employeeId}/salaries/create")
-    public ResponseEntity<Salary> createSalary(@PathVariable Long employeeId, @RequestBody Salary salary) {
-        Optional<Phdftstudent> optionalEmployee = phdstudentFulltimeRepository.findById(employeeId);
-
-        if (optionalEmployee.isPresent()) {
-            Phdftstudent employee = optionalEmployee.get();
-            salary.setEmployee(employee);
-            Salary savedSalary = salaryRepository.save(salary);
-            return new ResponseEntity<>(savedSalary, HttpStatus.CREATED);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
-    @GetMapping("/{employeeId}/salaries")
-    public ResponseEntity<List<Salary>> getEmployeeSalaries(@PathVariable Long employeeId) {
-        List<Salary> salaries = salaryRepository.findByEmployeeId(employeeId);
-        return new ResponseEntity<>(salaries, HttpStatus.OK);
-    }
+//
+//    @PostMapping("/{employeeId}/salaries/create")
+//    public ResponseEntity<Salary> createSalary(@PathVariable Long employeeId, @RequestBody Salary salary) {
+//        Optional<Phdftstudent> optionalEmployee = phdstudentFulltimeRepository.findById(employeeId);
+//
+//        if (optionalEmployee.isPresent()) {
+//            Phdftstudent employee = optionalEmployee.get();
+//            salary.setEmployee(employee);
+//            Salary savedSalary = salaryRepository.save(salary);
+//            return new ResponseEntity<>(savedSalary, HttpStatus.CREATED);
+//        } else {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//    }
+//
+//    @GetMapping("/{employeeId}/salaries")
+//    public ResponseEntity<List<Salary>> getEmployeeSalaries(@PathVariable Long employeeId) {
+//        List<Salary> salaries = salaryRepository.findByEmployeeId(employeeId);
+//        return new ResponseEntity<>(salaries, HttpStatus.OK);
+//    }
 
 }
