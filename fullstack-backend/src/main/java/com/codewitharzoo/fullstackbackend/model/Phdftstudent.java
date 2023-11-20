@@ -1,7 +1,10 @@
 package com.codewitharzoo.fullstackbackend.model;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Phdftstudent {
@@ -17,8 +20,17 @@ public class Phdftstudent {
     private String village;
     private String dist;
     private String state;
+    @OneToMany(mappedBy = "phdftstudent", cascade = CascadeType.ALL)
+    @JsonManagedReference // or @JsonIgnore if using Jackson 2.9 or higher
+    private List<ReportFullTime> reports;
 
-    // getters and setters
+    public List<ReportFullTime> getReports() {
+        return reports;
+    }
+
+    public void setReports(List<ReportFullTime> reports) {
+        this.reports = reports;
+    }
 
     public Long getId() {
         return id;

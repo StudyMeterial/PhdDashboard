@@ -1,6 +1,8 @@
 package com.codewitharzoo.fullstackbackend.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.Set;
 
 
 @Entity
@@ -12,6 +14,18 @@ public class Admin {
     private String password;
 
     // Getters and setters
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL)
+    private Set<AttendanceUser> attendanceUsers;
+
+    public Set<AttendanceUser> getAttendanceUsers() {
+        return attendanceUsers;
+    }
+
+    public void setAttendanceUsers(Set<AttendanceUser> attendanceUsers) {
+        this.attendanceUsers = attendanceUsers;
+    }
 
     public Long getId() {
         return id;

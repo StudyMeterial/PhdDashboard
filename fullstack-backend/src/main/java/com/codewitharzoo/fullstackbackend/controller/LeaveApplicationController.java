@@ -3,14 +3,14 @@ package com.codewitharzoo.fullstackbackend.controller;
 import com.codewitharzoo.fullstackbackend.model.LeaveApplication;
 import com.codewitharzoo.fullstackbackend.model.Phdftstudent;
 import com.codewitharzoo.fullstackbackend.repository.LeaveApplicationRepository;
-
+//import com.codewitharzoo.fullstackbackend.repository.PhdftstudentRepository;
 import com.codewitharzoo.fullstackbackend.repository.Phdstudent_FulltimeRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
+//import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @RestController
@@ -22,7 +22,7 @@ public class LeaveApplicationController {
     private LeaveApplicationRepository leaveApplicationRepository;
 
     @Autowired
-    private com.codewitharzoo.fullstackbackend.repository.Phdstudent_FulltimeRepository Phdstudent_FulltimeRepository;
+    private Phdstudent_FulltimeRepository phdftstudentRepository;
 
     @GetMapping
     public List<LeaveApplication> getAllLeaveApplications() {
@@ -39,7 +39,7 @@ public class LeaveApplicationController {
             @RequestBody LeaveApplication leaveApplication,
             @PathVariable Long phdStudentId) {
         try {
-            Phdftstudent phdStudent = Phdstudent_FulltimeRepository.findById(phdStudentId)
+            Phdftstudent phdStudent = phdftstudentRepository.findById(phdStudentId)
                     .orElseThrow(() -> new EntityNotFoundException("Phdftstudent not found with id: " + phdStudentId));
             leaveApplication.setPhdStudent(phdStudent);
             leaveApplication.setStatus("PENDING");

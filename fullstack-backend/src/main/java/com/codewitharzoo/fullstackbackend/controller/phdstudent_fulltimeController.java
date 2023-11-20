@@ -3,6 +3,7 @@ package com.codewitharzoo.fullstackbackend.controller;
 import com.codewitharzoo.fullstackbackend.exception.UserNotFoundException;
 import com.codewitharzoo.fullstackbackend.model.Phdftstudent;
 import com.codewitharzoo.fullstackbackend.repository.Phdstudent_FulltimeRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -75,25 +76,24 @@ public class phdstudent_fulltimeController {
         phdstudentFulltimeRepository.deleteById(id);
         return "User with id "+id+" has been deleted success.";
     }
+//    @PostMapping("/{id}/report-issue")
+//    public ResponseEntity<String> reportIssue(
+//            @PathVariable Long id,
+//            @RequestParam String issueDescription) {
+//        try {
+//            Phdftstudent phdftstudent = phdstudentFulltimeRepository.findById(id)
+//                    .orElseThrow(() -> new EntityNotFoundException("Phdftstudent not found with id: " + id));
 //
-//    @PostMapping("/{employeeId}/salaries/create")
-//    public ResponseEntity<Salary> createSalary(@PathVariable Long employeeId, @RequestBody Salary salary) {
-//        Optional<Phdftstudent> optionalEmployee = phdstudentFulltimeRepository.findById(employeeId);
+//            // Assuming you have a property in Phdftstudent to store issues
+//            phdftstudent.setIssueDescription(issueDescription);
 //
-//        if (optionalEmployee.isPresent()) {
-//            Phdftstudent employee = optionalEmployee.get();
-//            salary.setEmployee(employee);
-//            Salary savedSalary = salaryRepository.save(salary);
-//            return new ResponseEntity<>(savedSalary, HttpStatus.CREATED);
-//        } else {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//            // Save the updated Phdftstudent entity
+//            phdstudentFulltimeRepository.save(phdftstudent);
+//
+//            return ResponseEntity.ok("Issue reported successfully.");
+//        } catch (Exception e) {
+//            return ResponseEntity.status(500).body("Error reporting issue: " + e.getMessage());
 //        }
-//    }
-//
-//    @GetMapping("/{employeeId}/salaries")
-//    public ResponseEntity<List<Salary>> getEmployeeSalaries(@PathVariable Long employeeId) {
-//        List<Salary> salaries = salaryRepository.findByEmployeeId(employeeId);
-//        return new ResponseEntity<>(salaries, HttpStatus.OK);
 //    }
 
 }

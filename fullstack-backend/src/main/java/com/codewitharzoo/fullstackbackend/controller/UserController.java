@@ -3,13 +3,18 @@ package com.codewitharzoo.fullstackbackend.controller;
 import com.codewitharzoo.fullstackbackend.exception.UserNotFoundException;
 import com.codewitharzoo.fullstackbackend.model.Admin;
 import com.codewitharzoo.fullstackbackend.model.Admission;
+import com.codewitharzoo.fullstackbackend.model.AttendanceUser;
 import com.codewitharzoo.fullstackbackend.model.User;
+import com.codewitharzoo.fullstackbackend.repository.AttendanceUserRepository;
 import com.codewitharzoo.fullstackbackend.repository.UserRepository;
 //import org.springframework.stereotype.;
+import jakarta.persistence.EntityNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -21,7 +26,21 @@ public class UserController {
     this.userRepository = userRepository;
     }
 
+    @Autowired
+    private AttendanceUserRepository attendanceUserRepository;
 
+    // Other endpoints...
+
+    // Endpoint to get attendance records for a specific user
+    @GetMapping("/{userId}/attendance")
+    public ResponseEntity<List<AttendanceUser>> getUserAttendance(@PathVariable Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + userId));
+
+        List<AttendanceUser> attendanceList = attendanceUserRepository.findByUser(user);
+
+        return ResponseEntity.ok(attendanceList);
+    }
     @PostMapping("/user")
     public ResponseEntity<?> submitAdmission(@RequestBody User user) {
         // Validate the admission form data

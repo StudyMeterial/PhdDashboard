@@ -1,25 +1,16 @@
 package com.codewitharzoo.fullstackbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
 import java.util.Set;
 
 @Entity
-public class User{
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String fullname;
     private String PhdStudentHalf;
-
-    public String getPhdStudentHalf() {
-        return PhdStudentHalf;
-    }
-
-    public void setPhdStudentHalf(String phdStudentHalf) {
-        PhdStudentHalf = phdStudentHalf;
-    }
-
     private String email;
     private String username;
     private String password;
@@ -28,24 +19,26 @@ public class User{
     private String dist;
     private String state;
 
-//    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//    @JoinTable(name = "USER_ROLE",
-//            joinColumns = {
-//                    @JoinColumn(name = "USER_ID")
-//            },
-//            inverseJoinColumns = {
-//                    @JoinColumn(name = "ROLE_ID")
-//            }
-//    )
-//    private Set<Role> role;
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<LeaveApplicationUser> leaveApplicationUsers;
 
-//    public Set<Role> getRole() {
-//        return role;
-//    }
-//
-//    public void setRole(Set<Role> role) {
-//        this.role = role;
-//    }
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<AssignmentUser> assignmentUsers;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<AttendanceUser> attendanceUsers;
+
+    public Set<AttendanceUser> getAttendanceUsers() {
+        return attendanceUsers;
+    }
+
+    public void setAttendanceUsers(Set<AttendanceUser> attendanceUsers) {
+        this.attendanceUsers = attendanceUsers;
+    }
+// Getters and setters...
 
     public Long getId() {
         return id;
@@ -61,6 +54,14 @@ public class User{
 
     public void setFullname(String fullname) {
         this.fullname = fullname;
+    }
+
+    public String getPhdStudentHalf() {
+        return PhdStudentHalf;
+    }
+
+    public void setPhdStudentHalf(String phdStudentHalf) {
+        PhdStudentHalf = phdStudentHalf;
     }
 
     public String getEmail() {
@@ -119,6 +120,27 @@ public class User{
         this.state = state;
     }
 
+    public Set<LeaveApplicationUser> getleaveApplicationUsers() {
+        return leaveApplicationUsers;
+    }
 
+    public void setleaveApplicationUsers(Set<LeaveApplicationUser> leaveApplicationUsers) {
+        this.leaveApplicationUsers = leaveApplicationUsers;
+    }
 
+    public Set<LeaveApplicationUser> getLeaveApplicationUsers() {
+        return leaveApplicationUsers;
+    }
+
+    public void setLeaveApplicationUsers(Set<LeaveApplicationUser> leaveApplicationUsers) {
+        this.leaveApplicationUsers = leaveApplicationUsers;
+    }
+
+    public Set<AssignmentUser> getAssignmentUsers() {
+        return assignmentUsers;
+    }
+
+    public void setAssignmentUsers(Set<AssignmentUser> assignmentUsers) {
+        this.assignmentUsers = assignmentUsers;
+    }
 }
