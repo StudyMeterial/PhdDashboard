@@ -20,6 +20,19 @@ public class Phdftstudent {
     private String village;
     private String dist;
     private String state;
+
+    @ManyToOne
+    @JoinColumn(name = "feedback_id")
+    private Feedback feedback;
+
+    public Feedback getFeedback() {
+        return feedback;
+    }
+
+    public void setFeedback(Feedback feedback) {
+        this.feedback = feedback;
+    }
+
     @OneToMany(mappedBy = "phdftstudent", cascade = CascadeType.ALL)
     @JsonManagedReference // or @JsonIgnore if using Jackson 2.9 or higher
     private List<ReportFullTime> reports;
@@ -111,4 +124,6 @@ public class Phdftstudent {
     public void setState(String state) {
         this.state = state;
     }
+
+
 }

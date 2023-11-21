@@ -16,8 +16,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin/attendance")
+@CrossOrigin("http://localhost:3000")
 public class AdminAttendanceController {
-
     @Autowired
     private AdminRepository adminRepository;
 
@@ -59,9 +59,7 @@ public class AdminAttendanceController {
         try {
             User user = userRepository.findById(userId)
                     .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + userId));
-
             List<AttendanceUser> attendanceRecords = attendanceUserRepository.findByUser(user);
-
             return ResponseEntity.ok(String.valueOf(attendanceRecords));
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Error retrieving attendance records: " + e.getMessage());

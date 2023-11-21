@@ -24,8 +24,7 @@ public class LeaveUserApplicationController {
     private LeaveApplicationUserRepository leaveApplicationUserRepository;
     @Autowired
     private UserRepository userRepository;
-
-    // Endpoint for submitting a leave application
+    //    Endpoint for submitting a leave application
 //    @PostMapping("/submit")
 //    public ResponseEntity<String> submitLeaveApplication(@RequestBody LeaveApplicationUser leaveApplicationUser) {
 //        leaveApplicationUser.setStatus("PENDING");
